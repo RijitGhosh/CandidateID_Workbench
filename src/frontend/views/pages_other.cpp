@@ -418,10 +418,13 @@ NeuralPage::NeuralPage(AppContext* ctx, QWidget* parent) : QWidget(parent), ctx_
     auto* split = new QHBoxLayout;
     auto* left = new QVBoxLayout;
     left->addWidget(label("GRADIENTS AT INITIAL PARAMETERS  (w=0.5, b=0, v=1, c=0; x=1, y=2)", "SectionTitle"));
-    grad_ = makeTable({"Parameter", "Analytic", "Central difference (\xCE\xB5=1e-6)", "|error|", "\xE2\x89\xA4 1e-5"});
+    grad_ = makeTable({"Parameter", "Analytic", "Numeric (FD)", "|error|", "\xE2\x89\xA4 1e-5"});
+    grad_->setMinimumHeight(170);
+    grad_->setMaximumHeight(190);
     left->addWidget(grad_);
     left->addWidget(label("ONE SIMULTANEOUS UPDATE (learning rate 0.1)", "SectionTitle"));
     step_ = makeTable({"Parameter", "Before", "After"});
+    step_->setMinimumHeight(215);
     left->addWidget(step_);
     split->addLayout(left, 3);
     loss_ = new PlotWidget;
@@ -432,6 +435,7 @@ NeuralPage::NeuralPage(AppContext* ctx, QWidget* parent) : QWidget(parent), ctx_
     split->addWidget(loss_, 3);
     root->addLayout(split, 3);
     text_ = new QTextBrowser;
+    text_->setMaximumHeight(165);
     root->addWidget(text_, 2);
     connect(run, &QPushButton::clicked, this, &NeuralPage::compute);
 }
@@ -445,7 +449,7 @@ void NeuralPage::compute() {
     struct R { const char* n; double a, f, e; };
     const R rows[] = {{"dJ/dw", chk.analytic.dw, chk.numeric.dw, chk.absErrDw}, {"dJ/db", chk.analytic.db, chk.numeric.db, chk.absErrDb},
                       {"dJ/dv", chk.analytic.dv, chk.numeric.dv, chk.absErrDv}, {"dJ/dc", chk.analytic.dc, chk.numeric.dc, chk.absErrDc}};
-    for (const auto& r : rows) addRow(grad_, {r.n, fmt(r.a, 12), fmt(r.f, 12), QString::number(r.e, 'e', 2), r.e <= 1e-5 ? "pass" : "FAIL"}, r.e <= 1e-5 ? pal.success : pal.error);
+    for (const auto& r : rows) addRow(grad_, {r.n, fmt(r.a, 10), fmt(r.f, 10), QString::number(r.e, 'e', 2), r.e <= 1e-5 ? "pass" : "FAIL"}, r.e <= 1e-5 ? pal.success : pal.error);
     const auto h = nn::train(p0, pr, 101);
     step_->setRowCount(0);
     const char* names[] = {"w", "b", "v", "c"};
@@ -466,8 +470,8 @@ void NeuralPage::compute() {
     const auto t = nn::trace(p0, pr);
     text_->setHtml(QString(
         "<p><b>Forward:</b> z = wx + b = %1, h = tanh(z) = %2, \xC5\xB7 = vh + c = %3, J = %4.</p>"
-        "<p><b>Backward (chain rule):</b> \xE2\x88\x82J/\xE2\x88\x82\xC5\xB7 = \xC5\xB7 \xE2\x88\x92 y = %5; \xE2\x88\x82J/\xE2\x88\x82v = (\xC5\xB7 \xE2\x88\x92 y)h; \xE2\x88\x82J/\xE2\x88\x82c = \xC5\xB7 \xE2\x88\x92 y; "
-        "\xE2\x88\x82J/\xE2\x88\x82z = (\xC5\xB7 \xE2\x88\x92 y) v (1 \xE2\x88\x92 h\xC2\xB2) = %6; \xE2\x88\x82J/\xE2\x88\x82w = \xE2\x88\x82J/\xE2\x88\x82z \xC2\xB7 x; \xE2\x88\x82J/\xE2\x88\x82b = \xE2\x88\x82J/\xE2\x88\x82z.</p>"
+        "<p><b>Backward (chain rule):</b> \xE2\x88\x82J/\xE2\x88\x82\xC5\xB7 = \xC5\xB7 \xE2\x88\x92 y = %5; \xE2\x88\x82J/\xE2\x88\x82v = (\xC5\xB7 \xE2\x88\x92 y)h; \xE2\x88\x82J/\xE2\x88\x82" "c = \xC5\xB7 \xE2\x88\x92 y; "
+        "\xE2\x88\x82J/\xE2\x88\x82z = (\xC5\xB7 \xE2\x88\x92 y) v (1 \xE2\x88\x92 h\xC2\xB2) = %6; \xE2\x88\x82J/\xE2\x88\x82w = \xE2\x88\x82J/\xE2\x88\x82z \xC2\xB7 x; \xE2\x88\x82J/\xE2\x88\x82" "b = \xE2\x88\x82J/\xE2\x88\x82z.</p>"
         "<p><b>Direction:</b> the prediction (%2) is below the target (2), so \xE2\x88\x82J/\xE2\x88\x82\xC5\xB7 is negative. Gradient descent moves each parameter opposite its gradient, which increases \xC5\xB7 and lowers J. "
         "All four updates use the <i>original</i> parameter values.</p>"
         "<p><b>Convergence:</b> after the 101 updates shown (1 hand-checked update + 100 further steps) the loss is %7. tanh saturates as w and b grow, so the gradients through h shrink; "

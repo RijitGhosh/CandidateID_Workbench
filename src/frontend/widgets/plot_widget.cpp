@@ -52,7 +52,7 @@ void PlotWidget::paintEvent(QPaintEvent*) {
         p.setFont(ui);
         top = 34;
     }
-    const int left = 62, right = 18, bottom = 48;
+    const int left = 80, right = 18, bottom = 48;
     QRectF plot(left, top, width() - left - right, height() - top - bottom);
     if (plot.width() < 40 || plot.height() < 40) return;
 
@@ -123,7 +123,7 @@ void PlotWidget::paintEvent(QPaintEvent*) {
     p.setPen(pal.text);
     p.drawText(QRectF(plot.left(), height() - 22, plot.width(), 18), Qt::AlignCenter, xTitle_);
     p.save();
-    p.translate(14, plot.center().y());
+    p.translate(13, plot.center().y());
     p.rotate(-90);
     p.drawText(QRectF(-plot.height() / 2, -8, plot.height(), 16), Qt::AlignCenter, yTitle_);
     p.restore();
