@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Aether: launch packaged application",
+      "type": "process",
+      "command": "${workspaceFolder}/Launch.exe",
+      "problemMatcher": [],
+      "presentation": { "reveal": "never" },
+      "group": { "kind": "build", "isDefault": true }
+    }
+  ]
+}
