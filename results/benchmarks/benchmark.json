@@ -1,0 +1,23 @@
+{
+  "cpu_model": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "physical_cores": 2,
+  "logical_cores": 2,
+  "ram_gib": 7.83943939209,
+  "os": "Linux",
+  "compiler": "GCC 13.3.0",
+  "build_type": "Release",
+  "flags": " -O3 -DNDEBUG ",
+  "cases": 2000,
+  "elements": 2000,
+  "seed": 20260101,
+  "warmups": 1,
+  "repetitions": 5,
+  "speedup_assessable": true,
+  "agreement_ok": true,
+  "rows": [
+    {"workers": 1, "measured": true, "times_s": [0.071843307, 0.071610226, 0.071734613, 0.071837885, 0.071781885], "median_s": 0.071781885, "speedup": 1, "efficiency": 1, "max_abs_diff_c": 0},
+    {"workers": 2, "measured": true, "times_s": [0.035526435, 0.036006354, 0.035575905, 0.035851929, 0.035544833], "median_s": 0.035575905, "speedup": 2.01771072303, "efficiency": 1.00885536152, "max_abs_diff_c": 0},
+    {"workers": 3, "measured": false, "note": "not measured: 3 workers exceeds 2 logical CPU(s)"},
+    {"workers": 4, "measured": false, "note": "not measured: 4 workers exceeds 2 logical CPU(s)"}
+  ]
+}

@@ -1,0 +1,230 @@
+Running main() from ./googletest/src/gtest_main.cc
+[==========] Running 86 tests from 17 test suites.
+[----------] Global test environment set-up.
+[----------] 4 tests from ElementMatrices
+[ RUN      ] ElementMatrices.StiffnessMatchesKAOverLeTimesPattern
+[       OK ] ElementMatrices.StiffnessMatchesKAOverLeTimesPattern (0 ms)
+[ RUN      ] ElementMatrices.StiffnessRowsSumToZero
+[       OK ] ElementMatrices.StiffnessRowsSumToZero (0 ms)
+[ RUN      ] ElementMatrices.LoadIsQAleOver2OnBothNodes
+[       OK ] ElementMatrices.LoadIsQAleOver2OnBothNodes (0 ms)
+[ RUN      ] ElementMatrices.RejectsNonPositiveLength
+[       OK ] ElementMatrices.RejectsNonPositiveLength (0 ms)
+[----------] 4 tests from ElementMatrices (0 ms total)
+
+[----------] 2 tests from Assembly
+[ RUN      ] Assembly.TwoElementGlobalMatrixAndLoad
+[       OK ] Assembly.TwoElementGlobalMatrixAndLoad (0 ms)
+[ RUN      ] Assembly.SingularWithoutBoundaryConditions
+[       OK ] Assembly.SingularWithoutBoundaryConditions (0 ms)
+[----------] 2 tests from Assembly (0 ms total)
+
+[----------] 3 tests from BoundaryConditions
+[ RUN      ] BoundaryConditions.EndpointsAreExactlyPrescribed
+[       OK ] BoundaryConditions.EndpointsAreExactlyPrescribed (0 ms)
+[ RUN      ] BoundaryConditions.DifferentValuesAndNoHeatGeneration
+[       OK ] BoundaryConditions.DifferentValuesAndNoHeatGeneration (0 ms)
+[ RUN      ] BoundaryConditions.ApplyDirichletKeepsNeighbourRowsConsistent
+[       OK ] BoundaryConditions.ApplyDirichletKeepsNeighbourRowsConsistent (0 ms)
+[----------] 3 tests from BoundaryConditions (0 ms total)
+
+[----------] 4 tests from Analytical
+[ RUN      ] Analytical.FormulaValues
+[       OK ] Analytical.FormulaValues (0 ms)
+[ RUN      ] Analytical.NodalValuesMatchForAllRequiredMeshes
+[       OK ] Analytical.NodalValuesMatchForAllRequiredMeshes (0 ms)
+[ RUN      ] Analytical.MidpointErrorMatchesClosedForm
+[       OK ] Analytical.MidpointErrorMatchesClosedForm (0 ms)
+[ RUN      ] Analytical.MidpointErrorIsNotJustNodalError
+[       OK ] Analytical.MidpointErrorIsNotJustNodalError (0 ms)
+[----------] 4 tests from Analytical (0 ms total)
+
+[----------] 1 test from Convergence
+[ RUN      ] Convergence.SecondOrderAndMonotone
+[       OK ] Convergence.SecondOrderAndMonotone (0 ms)
+[----------] 1 test from Convergence (0 ms total)
+
+[----------] 1 test from InvalidParameters
+[ RUN      ] InvalidParameters.AreRejectedWithMessages
+[       OK ] InvalidParameters.AreRejectedWithMessages (0 ms)
+[----------] 1 test from InvalidParameters (0 ms total)
+
+[----------] 1 test from Export
+[ RUN      ] Export.CsvContainsHeaderAndAllNodes
+[       OK ] Export.CsvContainsHeaderAndAllNodes (0 ms)
+[----------] 1 test from Export (0 ms total)
+
+[----------] 20 tests from Stl
+[ RUN      ] Stl.ParsesSingleTriangleAndBoundingBox
+[       OK ] Stl.ParsesSingleTriangleAndBoundingBox (0 ms)
+[ RUN      ] Stl.KeywordsAreCaseInsensitiveAndScientificNotationWorks
+[       OK ] Stl.KeywordsAreCaseInsensitiveAndScientificNotationWorks (0 ms)
+[ RUN      ] Stl.EmptyFileIsRejected
+[       OK ] Stl.EmptyFileIsRejected (0 ms)
+[ RUN      ] Stl.WhitespaceOnlyIsRejected
+[       OK ] Stl.WhitespaceOnlyIsRejected (0 ms)
+[ RUN      ] Stl.MissingSolidKeyword
+[       OK ] Stl.MissingSolidKeyword (0 ms)
+[ RUN      ] Stl.SolidWithoutFacetsIsRejected
+[       OK ] Stl.SolidWithoutFacetsIsRejected (0 ms)
+[ RUN      ] Stl.TruncatedFileReportsMissingEndsolid
+[       OK ] Stl.TruncatedFileReportsMissingEndsolid (0 ms)
+[ RUN      ] Stl.TruncatedInsideFacet
+[       OK ] Stl.TruncatedInsideFacet (0 ms)
+[ RUN      ] Stl.NonFiniteCoordinatesRejectedWithLineNumber
+[       OK ] Stl.NonFiniteCoordinatesRejectedWithLineNumber (0 ms)
+[ RUN      ] Stl.NonNumericCoordinateRejected
+[       OK ] Stl.NonNumericCoordinateRejected (0 ms)
+[ RUN      ] Stl.WrongKeywordReportsExpectedAndFound
+[       OK ] Stl.WrongKeywordReportsExpectedAndFound (0 ms)
+[ RUN      ] Stl.DegenerateTrianglesAreSkippedAndCounted
+[       OK ] Stl.DegenerateTrianglesAreSkippedAndCounted (0 ms)
+[ RUN      ] Stl.DuplicateTrianglesIncludingPermutedOnesAreSkipped
+[       OK ] Stl.DuplicateTrianglesIncludingPermutedOnesAreSkipped (0 ms)
+[ RUN      ] Stl.OnlyDegenerateFacetsIsAnError
+[       OK ] Stl.OnlyDegenerateFacetsIsAnError (0 ms)
+[ RUN      ] Stl.BinaryFileIsRejectedWithClearMessage
+[       OK ] Stl.BinaryFileIsRejectedWithClearMessage (0 ms)
+[ RUN      ] Stl.BinaryDetectionWorksWhenHeaderStartsWithSolid
+[       OK ] Stl.BinaryDetectionWorksWhenHeaderStartsWithSolid (0 ms)
+[ RUN      ] Stl.ContentAfterEndsolidIsRejected
+[       OK ] Stl.ContentAfterEndsolidIsRejected (0 ms)
+[ RUN      ] Stl.MissingFileReportsError
+[       OK ] Stl.MissingFileReportsError (0 ms)
+[ RUN      ] Stl.NormalIsUnitAndZeroForDegenerate
+[       OK ] Stl.NormalIsUnitAndZeroForDegenerate (0 ms)
+[ RUN      ] Stl.ModerateSizeParsesQuickly
+[       OK ] Stl.ModerateSizeParsesQuickly (47 ms)
+[----------] 20 tests from Stl (47 ms total)
+
+[----------] 16 tests from Csv
+[ RUN      ] Csv.ParsesAndComputesStatistics
+[       OK ] Csv.ParsesAndComputesStatistics (0 ms)
+[ RUN      ] Csv.ColumnsMayBeReorderedAndCrlfAndBomAndBlankLinesWork
+[       OK ] Csv.ColumnsMayBeReorderedAndCrlfAndBomAndBlankLinesWork (0 ms)
+[ RUN      ] Csv.CommentsAreCollectedAndIgnored
+[       OK ] Csv.CommentsAreCollectedAndIgnored (0 ms)
+[ RUN      ] Csv.EmptyAndWhitespaceFilesRejected
+[       OK ] Csv.EmptyAndWhitespaceFilesRejected (0 ms)
+[ RUN      ] Csv.HeaderOnlyRejected
+[       OK ] Csv.HeaderOnlyRejected (0 ms)
+[ RUN      ] Csv.MissingColumnListedByName
+[       OK ] Csv.MissingColumnListedByName (0 ms)
+[ RUN      ] Csv.UnexpectedAndDuplicateColumnsRejected
+[       OK ] Csv.UnexpectedAndDuplicateColumnsRejected (0 ms)
+[ RUN      ] Csv.MalformedRowReportsLineNumber
+[       OK ] Csv.MalformedRowReportsLineNumber (0 ms)
+[ RUN      ] Csv.NonNumericRejectedWithColumnName
+[       OK ] Csv.NonNumericRejectedWithColumnName (0 ms)
+[ RUN      ] Csv.NonFiniteValuesRejected
+[       OK ] Csv.NonFiniteValuesRejected (0 ms)
+[ RUN      ] Csv.DuplicateNodeIdReportsBothLines
+[       OK ] Csv.DuplicateNodeIdReportsBothLines (0 ms)
+[ RUN      ] Csv.BadNodeIdsRejected
+[       OK ] Csv.BadNodeIdsRejected (0 ms)
+[ RUN      ] Csv.ManyErrorsAreCappedButFailureIsReported
+[       OK ] Csv.ManyErrorsAreCappedButFailureIsReported (0 ms)
+[ RUN      ] Csv.RoundTripExport
+[       OK ] Csv.RoundTripExport (0 ms)
+[ RUN      ] Csv.MissingFileReportsError
+[       OK ] Csv.MissingFileReportsError (0 ms)
+[ RUN      ] Csv.FiftyThousandRowsParse
+[       OK ] Csv.FiftyThousandRowsParse (21 ms)
+[----------] 16 tests from Csv (22 ms total)
+
+[----------] 1 test from Cases
+[ RUN      ] Cases.DeterministicForFixedSeedAndInRange
+[       OK ] Cases.DeterministicForFixedSeedAndInRange (0 ms)
+[----------] 1 test from Cases (0 ms total)
+
+[----------] 8 tests from Batch
+[ RUN      ] Batch.SerialMatchesDirectSolverForEachCase
+[       OK ] Batch.SerialMatchesDirectSolverForEachCase (0 ms)
+[ RUN      ] Batch.ParallelAgreesWithSerialWithinSpec
+[       OK ] Batch.ParallelAgreesWithSerialWithinSpec (10 ms)
+[ RUN      ] Batch.ResultOrderMatchesInputOrder
+[       OK ] Batch.ResultOrderMatchesInputOrder (0 ms)
+[ RUN      ] Batch.WorkerCountIsClampedToLogicalCpusAndCases
+[       OK ] Batch.WorkerCountIsClampedToLogicalCpusAndCases (0 ms)
+[ RUN      ] Batch.ProgressCountsEveryCase
+[       OK ] Batch.ProgressCountsEveryCase (0 ms)
+[ RUN      ] Batch.CancellationStopsEarlyAndIsReported
+[       OK ] Batch.CancellationStopsEarlyAndIsReported (40 ms)
+[ RUN      ] Batch.PreCancelledSerialRunDoesNoWork
+[       OK ] Batch.PreCancelledSerialRunDoesNoWork (0 ms)
+[ RUN      ] Batch.InvalidInputsThrow
+[       OK ] Batch.InvalidInputsThrow (0 ms)
+[----------] 8 tests from Batch (51 ms total)
+
+[----------] 2 tests from Benchmark
+[ RUN      ] Benchmark.MedianHandlesOddAndEven
+[       OK ] Benchmark.MedianHandlesOddAndEven (0 ms)
+[ RUN      ] Benchmark.SmallRunProducesConsistentReport
+[       OK ] Benchmark.SmallRunProducesConsistentReport (0 ms)
+[----------] 2 tests from Benchmark (0 ms total)
+
+[----------] 9 tests from Backprop
+[ RUN      ] Backprop.ForwardPassValues
+[       OK ] Backprop.ForwardPassValues (0 ms)
+[ RUN      ] Backprop.AnalyticGradientsMatchHandDerivation
+[       OK ] Backprop.AnalyticGradientsMatchHandDerivation (0 ms)
+[ RUN      ] Backprop.CentralDifferenceAgreesWithinSpecForEveryGradient
+[       OK ] Backprop.CentralDifferenceAgreesWithinSpecForEveryGradient (0 ms)
+[ RUN      ] Backprop.GradientCheckAlsoPassesAtOtherPoints
+[       OK ] Backprop.GradientCheckAlsoPassesAtOtherPoints (0 ms)
+[ RUN      ] Backprop.CheckDetectsAWrongGradient
+[       OK ] Backprop.CheckDetectsAWrongGradient (0 ms)
+[ RUN      ] Backprop.UpdateIsSimultaneousUsingOriginalParameters
+[       OK ] Backprop.UpdateIsSimultaneousUsingOriginalParameters (0 ms)
+[ RUN      ] Backprop.FirstUpdateDecreasesLoss
+[       OK ] Backprop.FirstUpdateDecreasesLoss (0 ms)
+[ RUN      ] Backprop.TrainingIsMonotoneAndConvergesTowardZero
+[       OK ] Backprop.TrainingIsMonotoneAndConvergesTowardZero (0 ms)
+[ RUN      ] Backprop.NegativeUpdateCountThrows
+[       OK ] Backprop.NegativeUpdateCountThrows (0 ms)
+[----------] 9 tests from Backprop (0 ms total)
+
+[----------] 6 tests from Hardware
+[ RUN      ] Hardware.SetContainsOneOfEachKindAndAllAreSimulated
+[       OK ] Hardware.SetContainsOneOfEachKindAndAllAreSimulated (0 ms)
+[ RUN      ] Hardware.LifecycleDiscoverCapabilitiesConnectTelemetryDisconnect
+[       OK ] Hardware.LifecycleDiscoverCapabilitiesConnectTelemetryDisconnect (0 ms)
+[ RUN      ] Hardware.TelemetrySequenceIncrements
+[       OK ] Hardware.TelemetrySequenceIncrements (0 ms)
+[ RUN      ] Hardware.TimeoutFaultIsRecoverableForEveryDevice
+[       OK ] Hardware.TimeoutFaultIsRecoverableForEveryDevice (0 ms)
+[ RUN      ] Hardware.RecoverWithoutFaultIsAnError
+[       OK ] Hardware.RecoverWithoutFaultIsAnError (0 ms)
+[ RUN      ] Hardware.DisconnectClearsPendingFault
+[       OK ] Hardware.DisconnectClearsPendingFault (0 ms)
+[----------] 6 tests from Hardware (0 ms total)
+
+[----------] 3 tests from Workspace
+[ RUN      ] Workspace.ProjectRoundTrip
+[       OK ] Workspace.ProjectRoundTrip (0 ms)
+[ RUN      ] Workspace.RejectsForeignFilesAndMissingFiles
+[       OK ] Workspace.RejectsForeignFilesAndMissingFiles (0 ms)
+[ RUN      ] Workspace.ActivityLogIsBoundedAndTimestamped
+[       OK ] Workspace.ActivityLogIsBoundedAndTimestamped (0 ms)
+[----------] 3 tests from Workspace (0 ms total)
+
+[----------] 1 test from SelfCheck
+[ RUN      ] SelfCheck.AllInAppChecksExecuteAndPass
+[       OK ] SelfCheck.AllInAppChecksExecuteAndPass (1 ms)
+[----------] 1 test from SelfCheck (1 ms total)
+
+[----------] 4 tests from Integration
+[ RUN      ] Integration.ExampleStlLoadsWithDocumentedCounts
+[       OK ] Integration.ExampleStlLoadsWithDocumentedCounts (0 ms)
+[ RUN      ] Integration.ExampleStlIsWatertightEveryEdgeSharedByTwoTriangles
+[       OK ] Integration.ExampleStlIsWatertightEveryEdgeSharedByTwoTriangles (0 ms)
+[ RUN      ] Integration.ExampleCsvLoadsAndCarriesSyntheticLabel
+[       OK ] Integration.ExampleCsvLoadsAndCarriesSyntheticLabel (0 ms)
+[ RUN      ] Integration.SolverExportReimportsAsTemperatureCsv
+[       OK ] Integration.SolverExportReimportsAsTemperatureCsv (0 ms)
+[----------] 4 tests from Integration (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 86 tests from 17 test suites ran. (124 ms total)
+[  PASSED  ] 86 tests.
+exit=0

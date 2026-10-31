@@ -1,0 +1,9 @@
+elements=10
+length_m=1
+area_m2=0.0001
+conductivity_W_mK=10
+heat_generation_W_m3=10000
+T_left_C=100
+T_right_C=20
+max_abs_error_midpoints_C=1.25
+max_abs_error_nodes_C=2.84217094304e-14
