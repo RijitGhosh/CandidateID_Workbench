@@ -64,4 +64,4 @@ QT_QPA_PLATFORM=offscreen ./build/src/frontend/AetherWorkbench --screenshots doc
 See `docs/limitations.md` (Windows package unverified, 2-CPU benchmark, ASCII STL only, simulated hardware, unverified embedded items).
 
 ## Documents
-`docs/`: architecture, thermal method, embedded design (+ research notes), testing, limitations, report, AI-use log, ownership statement, handwritten derivation worksheet, demo walkthrough.
+`docs/`: architecture, thermal method, embedded design (+ research notes), testing, limitations, report (`report.md`, PDF made from it), AI-use log, ownership statement, self-assessment against the rubric, viva guide, handwritten-derivation worksheets (PDF), demo walkthrough, commit log.

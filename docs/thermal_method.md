@@ -28,8 +28,12 @@ Measured by `build/aether_results` (file `results/raw/thermal_convergence.csv`):
 
 These equal the closed form q/(8k) h^2 (= 125 h^2): 125 x 0.1^2 = 1.25. Halving h divides the error by four: second-order convergence of the interpolated solution.
 
-## Debugging notes (how problems in such a solver show up)
-These are the failure modes the tests are designed to expose; they describe diagnosis, not bugs that were found in this code.
+## Debugging insight (from this project)
+**Checking only nodal error hides the discretisation error.** For this problem the FE nodal temperatures match the analytical solution to about 1e-13 C at every mesh size, so a nodal-only check says "converged" even for N = 1 and shows no convergence trend at all. The error lives inside the elements: the FE solution is linear there but the true solution is a parabola, and at a midpoint the gap is exactly q h^2/(8k). Measuring at midpoints gave 1.25, 0.3125, 0.0781, 0.0195 C (observed order 2.00) and made the verification meaningful.
+A second, tooling insight came from a deliberate experiment (`docs/ai_use_log.md`): after deleting the solver's pivot checks all tests still passed because a second "non-finite result" guard caught the singular system. The test was then tightened to require the specific pivot message.
+
+## Other failure modes the tests are designed to expose
+These describe diagnosis, not bugs that were found in this code.
 1. **Singular matrix.** Without boundary conditions, K has a rigid-body mode (adding a constant to T changes nothing). `Assembly.SingularWithoutBoundaryConditions` shows the solver reports it instead of returning garbage.
 2. **Forgetting to move the known temperature to the right-hand side.** The solution then has the right end values but a wrong interior; `BoundaryConditions.ApplyDirichletKeepsNeighbourRowsConsistent` checks row 1 explicitly.
 3. **Wrong load factor.** Using qA h instead of qA h / 2 per node doubles the heating; the analytical comparison and `ElementMatrices.LoadIsQAleOver2OnBothNodes` catch it.

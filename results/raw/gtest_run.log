@@ -94,8 +94,8 @@ Running main() from ./googletest/src/gtest_main.cc
 [ RUN      ] Stl.NormalIsUnitAndZeroForDegenerate
 [       OK ] Stl.NormalIsUnitAndZeroForDegenerate (0 ms)
 [ RUN      ] Stl.ModerateSizeParsesQuickly
-[       OK ] Stl.ModerateSizeParsesQuickly (47 ms)
-[----------] 20 tests from Stl (47 ms total)
+[       OK ] Stl.ModerateSizeParsesQuickly (35 ms)
+[----------] 20 tests from Stl (35 ms total)
 
 [----------] 16 tests from Csv
 [ RUN      ] Csv.ParsesAndComputesStatistics
@@ -129,8 +129,8 @@ Running main() from ./googletest/src/gtest_main.cc
 [ RUN      ] Csv.MissingFileReportsError
 [       OK ] Csv.MissingFileReportsError (0 ms)
 [ RUN      ] Csv.FiftyThousandRowsParse
-[       OK ] Csv.FiftyThousandRowsParse (21 ms)
-[----------] 16 tests from Csv (22 ms total)
+[       OK ] Csv.FiftyThousandRowsParse (18 ms)
+[----------] 16 tests from Csv (18 ms total)
 
 [----------] 1 test from Cases
 [ RUN      ] Cases.DeterministicForFixedSeedAndInRange
@@ -141,7 +141,7 @@ Running main() from ./googletest/src/gtest_main.cc
 [ RUN      ] Batch.SerialMatchesDirectSolverForEachCase
 [       OK ] Batch.SerialMatchesDirectSolverForEachCase (0 ms)
 [ RUN      ] Batch.ParallelAgreesWithSerialWithinSpec
-[       OK ] Batch.ParallelAgreesWithSerialWithinSpec (10 ms)
+[       OK ] Batch.ParallelAgreesWithSerialWithinSpec (8 ms)
 [ RUN      ] Batch.ResultOrderMatchesInputOrder
 [       OK ] Batch.ResultOrderMatchesInputOrder (0 ms)
 [ RUN      ] Batch.WorkerCountIsClampedToLogicalCpusAndCases
@@ -149,12 +149,12 @@ Running main() from ./googletest/src/gtest_main.cc
 [ RUN      ] Batch.ProgressCountsEveryCase
 [       OK ] Batch.ProgressCountsEveryCase (0 ms)
 [ RUN      ] Batch.CancellationStopsEarlyAndIsReported
-[       OK ] Batch.CancellationStopsEarlyAndIsReported (40 ms)
+[       OK ] Batch.CancellationStopsEarlyAndIsReported (35 ms)
 [ RUN      ] Batch.PreCancelledSerialRunDoesNoWork
 [       OK ] Batch.PreCancelledSerialRunDoesNoWork (0 ms)
 [ RUN      ] Batch.InvalidInputsThrow
 [       OK ] Batch.InvalidInputsThrow (0 ms)
-[----------] 8 tests from Batch (51 ms total)
+[----------] 8 tests from Batch (43 ms total)
 
 [----------] 2 tests from Benchmark
 [ RUN      ] Benchmark.MedianHandlesOddAndEven
@@ -225,6 +225,6 @@ Running main() from ./googletest/src/gtest_main.cc
 [----------] 4 tests from Integration (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 86 tests from 17 test suites ran. (124 ms total)
+[==========] 86 tests from 17 test suites ran. (100 ms total)
 [  PASSED  ] 86 tests.
 exit=0

@@ -1,6 +1,6 @@
 # Handwritten derivation worksheet (2 pages) - to be copied by hand, photographed or scanned by the candidate
 
-**This is a printed template with the correct equations and numbers. It is NOT a handwritten scan.** Copy it by hand onto two sheets and sign it; do not submit this typed text as handwriting.
+**This is a printed template with the correct equations and numbers. It is NOT a handwritten scan.** Print-ready versions: `docs/worksheet_to_copy_by_hand.pdf` (full equations and numbers, large type, 2 pages) and `docs/worksheet_blank_practice.pdf` (blank ruled sheets to practise without looking). Copy it by hand onto two sheets and sign it; do not submit this typed text as handwriting.
 Numbers below come from the C++ program (`results/raw/backprop_derivation_values.txt`, 12 significant digits); round as you write.
 
 ## Page 1 - Forward pass and gradients

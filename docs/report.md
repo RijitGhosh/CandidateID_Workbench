@@ -1,6 +1,6 @@
 # Aether Engineering Workbench - technical report
 
-Candidate: ____________ (ID ____________). Date of build: 2026-10-31. All numbers below were produced by the code in this repository on the environment named in section 7.
+Candidate: identified by the ZIP file name. Built 2026-10-31 and 2026-11-01. All numbers below were produced by the code in this repository on the environment named in section 7.
 
 ## 1. Design choices
 A desktop workbench (C++17, CMake, Qt 6 Widgets) with a strict split: a Qt-free numerical **core**, a thin Qt-free **application** layer and a **frontend** that only draws and handles input.
@@ -46,7 +46,9 @@ Voltage domains are 3.3 V throughout with a common ground; level shifting is req
 
 ## 7. Test outcomes
 86 GoogleTest tests passed; 8 of 8 in-application self-checks passed; gradient check maximum error 1.12e-10 (limit 1e-5); loss falls from 1.1825 to 1.08e-20 over 101 updates (1 hand-checkable update plus 100 more). Environment and commands: `docs/testing.md`.
-Defects found by testing: a segfault caused by a faulty test and a whitespace-only CSV mishandled by the parser; both were fixed.
+Defects found by testing: a segfault caused by a faulty test and a whitespace-only CSV mishandled by the parser; both were fixed. A deliberate challenge test (removing the solver's singular-pivot checks) showed that a backstop guard hid the change from the tests; the test was tightened and now fails in that case (`docs/ai_use_log.md`). The Windows build of the core tool was also run under Wine and reproduced the same convergence table.
+
+**Debugging insight.** Nodal error is about 1e-13 C and shows no convergence, so verification must use element midpoints, where the error equals q h^2/(8k).
 
 ## 8. Limitations
 The Windows GUI package was not built or run here; Launch.exe and the core CLI were only cross-compiled. Benchmark limited to 2 logical CPUs. STL is ASCII-only; CSV nodes are not registered to the STL; the viewport is software-rendered; hardware is simulated; embedded facts partly UNVERIFIED. Full list: `docs/limitations.md`.

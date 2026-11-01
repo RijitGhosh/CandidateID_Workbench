@@ -22,7 +22,8 @@ QT_QPA_PLATFORM=offscreen ./build/src/frontend/AetherWorkbench --screenshots doc
 - `./build/aether_tests`: **86 tests from 17 test suites ran, 86 passed** (log: `results/raw/gtest_run.log`).
 - `ctest`: **100% tests passed, 0 tests failed out of 86**.
 - In-application self-checks (Verification page): 8 of 8 passed when run for the screenshots (see `docs/screenshots/08_verification_*.png`).
-- These results are for the Linux build only. The Windows build was not executed (see `docs/limitations.md`).
+- These results are for the Linux build. The core command-line tool was also cross-compiled for Windows (MinGW-w64) and executed under **Wine** on Linux: it reported `OS: Windows`, passed the serial/parallel agreement check, and reproduced the convergence table (`1.25, 0.3125, 0.078125, 0.01953125`) and the backprop values (identical except CRLF line endings and the last digits of the finite-difference values). Wine is not native Windows, and the Qt GUI was not run on Windows by the author; the GitHub Actions workflow is the intended proof (see README).
+- Deliberate challenge test and the strengthened singular-system test: see `docs/ai_use_log.md`.
 
 Two real defects were found by the test run and fixed before the final run (also recorded in `docs/ai_use_log.md`):
 1. A test took `begin()` and `end()` from two different temporary strings (`std::string::str()`), which crashed the test binary with a segmentation fault; fixed by keeping the strings alive.

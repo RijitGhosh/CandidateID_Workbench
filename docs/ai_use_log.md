@@ -1,37 +1,47 @@
 # AI use log
 
-Entries record what actually happened in the build session. Candidate fields are marked and must be completed by the candidate; nothing here was invented to fill gaps.
+Everything below is a record of what actually happened; nothing was invented. Dates are 2026-10-31 to 2026-11-01.
 
-## Tools
-- Claude Code (Claude Sonnet 5.5, model id `claude-sonnet-5-5`), running in a Linux cloud container, 2026-10-31.
-- A delegated research sub-agent of the same session (web search + page fetch) for embedded board facts.
+## Tools and models
+- Claude Code with Claude Sonnet 5.5 (model id `claude-sonnet-5-5`) in a Linux cloud container. It wrote, built and ran the code, tests and documents in this repository.
+- One delegated research sub-agent of the same session (web search and page fetch) for the embedded-board facts.
+- Candidate role: set the requirements, supplied the assignment brief and reviewed the results. **The candidate wrote no source code in this repository so far.** Any later edit by the candidate should be added to the table at the end.
 
-## Representative prompt (verbatim extract of the task)
-"You are a senior engineering software architect ... build a complete, working engineering application for the PASS SCIENCE WORKS R&D Internship 2026-2027 technical assignment. PROJECT NAME: Aether Engineering Workbench ... Do not simulate the thermal solver or multithreading. Do not create fake benchmark results ... Do not fabricate test results, Git history, AI interactions, or evidence."
-Follow-up instructions: "build it fully and fast now", "Continue and finish it fast now".
+## Prompts given by the candidate (all of them, in order)
+| # | Prompt (verbatim or near-verbatim) | Result |
+|---|---|---|
+| 1 | Attached assignment text ("You are a senior engineering software architect ... build a complete, working engineering application ... Aether Engineering Workbench ... Do not simulate the thermal solver or multithreading. Do not create fake benchmark results ... Do not fabricate test results, Git history, AI interactions, or evidence.") plus "build it fully and fast now" | Core C++ library, tests, tools, first docs |
+| 2 | "Continue and finish it fast now" | Qt 6 frontend, screenshots, results, packaging scripts, ZIP |
+| 3 | Attached the official brief (PDF): "Give me the setup in steps. And check whether it is fully done and can be evaluated for getting selected also I have macbook air m1 I will not do parallel windows ..." | Gap analysis against the rubric; GitHub Actions Windows workflow; macOS script; macOS system-info code; setup steps |
+| 4 | "Whatever is not done yet you finish it fast and do make fully done handwritten one ai log etc everything also make the evaluation fully done ... then give me proper set-up steps" | Self-assessment, viva guide, print-ready worksheets, this log; the assistant declined to fabricate a handwritten scan or invent the candidate's own edits (see below) |
 
-## What the AI produced
-Core C++ library, tests, Qt UI, tools, documentation, screenshots and results (all in this repository).
+## Relevant AI outputs (representative)
+- `src/core/thermal/thermal.cpp`: 1-D FE solver; `src/core/performance/batch.cpp`: bounded worker pool with atomic work index and disjoint result slices; `src/core/neural/backprop.cpp`: hand-derived gradients; `src/frontend/*`: Qt UI.
+- Embedded facts: sub-agent output stored in `docs/embedded_research_notes.md` with source URLs and UNVERIFIED flags.
 
-## Problems and unsuitable suggestions identified
-1. **Test code with undefined behaviour.** A generated test passed `n.str().begin()` and `n.str().end()` (two different temporary strings) to `std::count`. Symptom: the test binary crashed with a segmentation fault at `Export.CsvContainsHeaderAndAllNodes`. Fix: store the strings first. Evidence: git commit "Add GoogleTest suite (86 tests); fix two issues found by tests".
-2. **Wrong "empty file" check in the CSV parser.** The first version trimmed only spaces, tabs and CR, so a file containing only newlines was not reported as empty and test `Csv.EmptyAndWhitespaceFilesRejected` failed. Fix: test with `find_first_not_of(" \t\r\n")`.
-3. **A confused expected-value expression in a unit test** (`0.25 * 0.01 * 0.5 * 1.0 / 0.25 * 0.25`) that happened to equal the right number; replaced by the plain `0.25` with a comment, so the test documents the formula qA*le/2.
-4. **Unsuitable hardware pairing found during research.** The initial plan assumed the JTAG-HS3 would debug both boards. The sourced documents showed the Nucleo's ST-LINK is SWD-only and the Arty's external port J8 is documented for a JTAG-HS2, not an HS3. The design document was written around that finding instead of hiding it.
-5. **Build bug (link error)** in the GUI: `AppContext` signals were not generated because its header was not listed for Qt's automatic MOC; fixed in `src/frontend/CMakeLists.txt`.
+## Incorrect or unsuitable AI suggestions found (all real, all fixed or disclosed)
+1. **Test with undefined behaviour.** A generated test passed `begin()` and `end()` of two different temporary strings to `std::count`; the test binary segfaulted at `Export.CsvContainsHeaderAndAllNodes`. Fixed by keeping the strings alive.
+2. **Wrong empty-file check.** The CSV parser trimmed only spaces, tabs and CR, so a file of only newlines was not reported as empty (`Csv.EmptyAndWhitespaceFilesRejected` failed). Fixed with `find_first_not_of(" \t\r\n")`.
+3. **Obscure expected value in a unit test**, replaced by the plain formula value with a comment.
+4. **JTAG-HS3 assumed to debug both boards.** Research showed the Nucleo's ST-LINK is SWD-only and the Arty's external JTAG port is documented for an HS2. The design document states this instead of hiding it.
+5. **Link error:** the GUI's `AppContext` signals were not generated because the header was not listed for Qt's automatic MOC.
+6. **Hex-escape bug:** the string `"\xE2\x88\x82b"` in the Neural page text swallowed the letter `b` (compiler warning). Fixed by splitting the literal. Found by a compiler warning, not by testing.
+7. **Script bug:** unescaped backticks in `scripts/make_demo_log.sh` triggered command substitution ("Permission denied"). Fixed.
+8. **Unverified-claim risk:** the first status message to the candidate called the work "done" while the Windows build had never run; the assistant corrected this in the next messages and in `docs/limitations.md`.
 
-## Validation of AI output
-- 86 GoogleTest tests run and passed (`results/raw/gtest_run.log`).
-- FE nodal error ~1e-13 C and midpoint error equal to the closed form q h^2 / (8k) at N = 10, 20, 40, 80.
-- Gradient check against central differences: 1.12e-10 maximum error.
-- Serial/parallel agreement 0.0 C on the benchmark workload.
-- Screenshots were generated by driving the real application and were inspected visually.
-- Embedded facts carry source URLs and a DOCUMENTED / UNVERIFIED status; the research tool used a summarising fetch, so numbers must be re-checked against PDFs.
+## Deliberate challenge test (executed)
+Question: do the tests really protect the singular-system detection in the thermal solver?
+1. Copy of the repository; both pivot checks in `solveTridiagonal` replaced by `if (false)`. **Result: all 86 tests still passed.** Reason: a second guard ("solution contains non-finite values") caught the singular system. The test only checked that *some* `SingularSystemError` was thrown.
+2. Also disabled the non-finite guard. **Result: 85 passed, 1 failed** (`Assembly.SingularWithoutBoundaryConditions`: "Expected ... throws an exception of type SingularSystemError. Actual: it throws nothing.").
+3. Finding: the test could not tell which guard fired. Fix: the test now also requires the message to contain "pivot". Re-run of step 1 with the strengthened test: **85 passed, 1 failed**, message "solution contains non-finite values" (so the weakened solver is now detected). The real code was not modified for the challenge; only scratch copies were.
 
-## Challenge test (deliberate)
-Request: "disable the singular-system check and see whether the solver still passes its tests." Expected: tests fail. Not executed in this session; the existing test `Assembly.SingularWithoutBoundaryConditions` documents the behaviour. (Candidate: perform this experiment yourself and record the real outcome here.)
+## Validation of AI output (evidence files)
+`results/raw/gtest_run.log` (86 tests), `docs/screenshots/session_log.txt` (application activity log), `results/benchmarks/`, `results/raw/backprop_derivation_values.txt`, the Wine run of the Windows core tool (`docs/testing.md`), and visual inspection of every screenshot.
 
-## Candidate section (TO BE COMPLETED BY THE CANDIDATE)
-- My prompts and edits: ______________________________
-- Output I rejected or changed, and why: ______________________________
-- How I checked correctness myself: ______________________________
+## What the candidate must do (cannot be done by the AI)
+- Read the code you will defend (see `docs/viva_guide.md`), re-run the tests yourself, and copy the worksheet by hand.
+- Add a row here for every change you make yourself:
+
+| Date | What I changed myself | Why | How I checked |
+|---|---|---|---|
+| | | | |

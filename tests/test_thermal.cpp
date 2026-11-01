@@ -53,6 +53,13 @@ TEST(Assembly, SingularWithoutBoundaryConditions) {
     std::vector<double> x;
     EXPECT_THROW(solveTridiagonal(sc.sys, sc.cprime, x), SingularSystemError)
         << "pure-Neumann conduction has a rigid-body mode; the solver must report it, not return garbage";
+    // The pivot check must be the one that fires (it names the cause); a later "non-finite result" guard is only a backstop.
+    try {
+        solveTridiagonal(sc.sys, sc.cprime, x);
+        FAIL() << "expected SingularSystemError";
+    } catch (const SingularSystemError& e) {
+        EXPECT_NE(std::string(e.what()).find("pivot"), std::string::npos) << "message was: " << e.what();
+    }
 }
 
 TEST(BoundaryConditions, EndpointsAreExactlyPrescribed) {
