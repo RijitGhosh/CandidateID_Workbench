@@ -2,7 +2,7 @@
 
 **Delivery / platform**
 - The development container is Linux with 2 logical CPUs. The Qt application was built and run here (offscreen platform) and all screenshots come from that run.
-- **A Windows build of the GUI (`bin/AetherWorkbench.exe` and Qt DLLs) was NOT produced here**, because no Qt for Windows is available in this environment. `Launch.exe` and the C++ core (as a command-line tool, `aether_results.exe`) were cross-compiled with MinGW-w64 and confirmed to be valid Windows PE files, but **neither was executed on Windows**. To get the complete one-click package, run `scripts\package_windows.bat <Qt prefix>` on a Windows 11 machine (see README). Until then, treat the one-click requirement as unverified.
+- **A Windows build of the GUI (`bin/AetherWorkbench.exe` and Qt DLLs) was NOT produced here**, because no Qt for Windows is available in this environment. `Launch.exe` and the C++ core (as a command-line tool, `aether_results.exe`) were cross-compiled with MinGW-w64 and confirmed to be valid Windows PE files, but **neither was executed on Windows**. The complete package is produced by `.github/workflows/windows-package.yml` (GitHub-hosted Windows runner) or `scripts\package_windows.bat` on a Windows 11 machine (see README). The workflow itself has not been run by the author of this repository yet: until a run succeeds and its output has been started on a Windows PC, treat the one-click requirement as unverified. A hosted runner proves the program starts on Windows; it does not replace trying a clean Windows 11 PC.
 - Not tested on Windows 11: file dialogs, DPI scaling, `windeployqt` output, the Launch.exe -> bin\AetherWorkbench.exe hand-off.
 
 **Benchmark**

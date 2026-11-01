@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 {
   echo "# Demonstration walkthrough (screenshots, not a video)"
   echo
-  echo "Screenshots were written by \`AetherWorkbench --screenshots\` (the application driving itself: loads the example STL, solves, loads the CSV, runs the benchmark, injects and recovers a simulated timeout, computes backprop, runs self-checks). Timestamps are file modification times."
+  echo "Screenshots were written by \`AetherWorkbench --screenshots\` (the application driving itself: loads the example STL, solves, loads the CSV, runs the benchmark, injects and recovers a simulated timeout, computes backprop, runs self-checks). Timestamps are file modification times; the application activity log of the same run is in `docs/screenshots/session_log.txt`."
   echo
   echo "| Time (local) | Screenshot | What it shows |"
   echo "|---|---|---|"

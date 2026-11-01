@@ -15,7 +15,13 @@
 #include <windows.h>
 #else
 #include <unistd.h>
+#if defined(__APPLE__)
+#include <sys/sysctl.h>
+#include <sys/types.h>
 #endif
+#endif
+#include <cstdlib>
+#include <cstring>
 #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
 #if defined(_MSC_VER)
 #include <intrin.h>
@@ -84,6 +90,27 @@ SystemInfo querySystemInfo() {
             s.physicalCores = cores;
         }
     }
+#elif defined(__APPLE__)
+    s.os = "macOS";
+    auto sysStr = [](const char* name) {
+        std::size_t n = 0;
+        if (sysctlbyname(name, nullptr, &n, nullptr, 0) != 0 || n == 0) return std::string();
+        std::string v(n, '\0');
+        if (sysctlbyname(name, v.data(), &n, nullptr, 0) != 0) return std::string();
+        v.resize(std::strlen(v.c_str()));
+        return v;
+    };
+    auto sysInt = [](const char* name) -> long long {
+        long long v = 0;
+        std::size_t n = sizeof(v);
+        if (sysctlbyname(name, &v, &n, nullptr, 0) != 0) return 0;
+        return v;
+    };
+    const std::string brand = sysStr("machdep.cpu.brand_string");
+    if (!brand.empty()) s.cpuModel = brand;
+    s.physicalCores = static_cast<int>(sysInt("hw.physicalcpu"));
+    const long long mem = sysInt("hw.memsize");
+    if (mem > 0) s.ramGiB = static_cast<double>(mem) / (1024.0 * 1024.0 * 1024.0);
 #else
     s.os = "Linux";
     const long pages = sysconf(_SC_PHYS_PAGES), psz = sysconf(_SC_PAGE_SIZE);

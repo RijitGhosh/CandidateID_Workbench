@@ -5,3 +5,6 @@ out/
 .vs/
 .vscode/ipch/
 dist/
+build-mac/
+*.bundle
+evidence/

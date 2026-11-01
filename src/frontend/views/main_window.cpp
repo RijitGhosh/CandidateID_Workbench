@@ -14,6 +14,7 @@
 #include <QPixmap>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <fstream>
 
 #include "../widgets/plot_widget.hpp"
 #include "../widgets/ui_common.hpp"
@@ -338,6 +339,11 @@ bool MainWindow::captureScreenshots(const QString& outDir) {
             for (auto* pw : neural_->findChildren<PlotWidget*>()) { pw->resize(760, 460); ok = pw->saveImage(QString("%1/plots/backprop_loss_%2.png").arg(outDir, t)) && ok; }
             for (auto* pw : performance_->findChildren<PlotWidget*>()) { pw->resize(760, 460); ok = pw->saveImage(QString("%1/plots/benchmark_speedup_%2.png").arg(outDir, t)) && ok; }
         }
+    }
+    {   // activity log of the scripted session, kept as evidence next to the screenshots
+        std::ofstream log((outDir + "/session_log.txt").toStdString());
+        for (const auto& a : ctx_->state.activity) log << a.timestamp << "  " << a.message << "\n";
+        ok = log.good() && ok;
     }
     return ok;
 }

@@ -1,0 +1,58 @@
+2026-11-01 07:17:16  Application started
+2026-11-01 07:17:16  Imported STL example_bracket.stl (24 triangles)
+2026-11-01 07:17:17  Thermal solve N=20 (max midpoint error 0.3125 C)
+2026-11-01 07:17:17  Mesh convergence study N = 10, 20, 40, 80
+2026-11-01 07:17:17  Imported temperature CSV example_temperature.csv (189 nodes)
+2026-11-01 07:17:18  Benchmark finished (2000 cases, N=2000)
+2026-11-01 07:17:18  Hardware (simulated): [mock-mcu-0] discover: ok
+2026-11-01 07:17:18  Hardware (simulated): [mock-fpga-0] discover: ok
+2026-11-01 07:17:18  Hardware (simulated): [mock-jtag-0] discover: ok
+2026-11-01 07:17:18  Hardware (simulated): [mock-mcu-0] connect: ok (simulated)
+2026-11-01 07:17:18  Hardware (simulated): [mock-fpga-0] connect: ok (simulated)
+2026-11-01 07:17:18  Hardware (simulated): [mock-jtag-0] connect: ok (simulated)
+2026-11-01 07:17:18  Hardware (simulated): [mock-mcu-0] telemetry #0 [SIMULATED]:  sim_uptime_ticks=0  sim_adc_co
+2026-11-01 07:17:18  Hardware (simulated): [mock-fpga-0] telemetry #0 [SIMULATED]:  sim_configured=1  sim_clock_c
+2026-11-01 07:17:18  Hardware (simulated): [mock-jtag-0] telemetry #0 [SIMULATED]:  sim_scan_count=0  sim_vref_se
+2026-11-01 07:17:18  Hardware (simulated): [mock-mcu-0] timeout armed: next telemetry read will time out
+2026-11-01 07:17:18  Hardware (simulated): [mock-fpga-0] timeout armed: next telemetry read will time out
+2026-11-01 07:17:18  Hardware (simulated): [mock-jtag-0] timeout armed: next telemetry read will time out
+2026-11-01 07:17:18  Hardware (simulated): [mock-mcu-0] telemetry FAILED: Timeout (simulated telemetry timeout (n
+2026-11-01 07:17:18  Hardware (simulated): [mock-fpga-0] telemetry FAILED: Timeout (simulated telemetry timeout (
+2026-11-01 07:17:18  Hardware (simulated): [mock-jtag-0] telemetry FAILED: Timeout (simulated telemetry timeout (
+2026-11-01 07:17:18  Hardware (simulated): [mock-mcu-0] recover: ok, link restored (simulated)
+2026-11-01 07:17:18  Hardware (simulated): [mock-fpga-0] recover: ok, link restored (simulated)
+2026-11-01 07:17:18  Hardware (simulated): [mock-jtag-0] recover: ok, link restored (simulated)
+2026-11-01 07:17:18  Hardware (simulated): [mock-mcu-0] telemetry #1 [SIMULATED]:  sim_uptime_ticks=100  sim_adc_
+2026-11-01 07:17:18  Hardware (simulated): [mock-fpga-0] telemetry #1 [SIMULATED]:  sim_configured=1  sim_clock_c
+2026-11-01 07:17:18  Hardware (simulated): [mock-jtag-0] telemetry #1 [SIMULATED]:  sim_scan_count=1  sim_vref_se
+2026-11-01 07:17:18  Backprop gradient check + 101 training updates
+2026-11-01 07:17:18  8 of 8 self-checks passed (run 2026-11-01 07:17:18)
+2026-11-01 07:17:19  Thermal solve N=20 (max midpoint error 0.3125 C)
+2026-11-01 07:17:19  Imported STL example_bracket.stl (24 triangles)
+2026-11-01 07:17:20  Thermal solve N=20 (max midpoint error 0.3125 C)
+2026-11-01 07:17:20  Mesh convergence study N = 10, 20, 40, 80
+2026-11-01 07:17:20  Imported temperature CSV example_temperature.csv (189 nodes)
+2026-11-01 07:17:21  Benchmark finished (2000 cases, N=2000)
+2026-11-01 07:17:21  Hardware (simulated): [mock-mcu-0] discover: ok
+2026-11-01 07:17:21  Hardware (simulated): [mock-fpga-0] discover: ok
+2026-11-01 07:17:21  Hardware (simulated): [mock-jtag-0] discover: ok
+2026-11-01 07:17:21  Hardware (simulated): [mock-mcu-0] connect: already connected (simulated)
+2026-11-01 07:17:21  Hardware (simulated): [mock-fpga-0] connect: already connected (simulated)
+2026-11-01 07:17:21  Hardware (simulated): [mock-jtag-0] connect: already connected (simulated)
+2026-11-01 07:17:21  Hardware (simulated): [mock-mcu-0] telemetry #2 [SIMULATED]:  sim_uptime_ticks=200  sim_adc_
+2026-11-01 07:17:21  Hardware (simulated): [mock-fpga-0] telemetry #2 [SIMULATED]:  sim_configured=1  sim_clock_c
+2026-11-01 07:17:21  Hardware (simulated): [mock-jtag-0] telemetry #2 [SIMULATED]:  sim_scan_count=2  sim_vref_se
+2026-11-01 07:17:21  Hardware (simulated): [mock-mcu-0] timeout armed: next telemetry read will time out
+2026-11-01 07:17:21  Hardware (simulated): [mock-fpga-0] timeout armed: next telemetry read will time out
+2026-11-01 07:17:21  Hardware (simulated): [mock-jtag-0] timeout armed: next telemetry read will time out
+2026-11-01 07:17:21  Hardware (simulated): [mock-mcu-0] telemetry FAILED: Timeout (simulated telemetry timeout (n
+2026-11-01 07:17:21  Hardware (simulated): [mock-fpga-0] telemetry FAILED: Timeout (simulated telemetry timeout (
+2026-11-01 07:17:21  Hardware (simulated): [mock-jtag-0] telemetry FAILED: Timeout (simulated telemetry timeout (
+2026-11-01 07:17:21  Hardware (simulated): [mock-mcu-0] recover: ok, link restored (simulated)
+2026-11-01 07:17:21  Hardware (simulated): [mock-fpga-0] recover: ok, link restored (simulated)
+2026-11-01 07:17:21  Hardware (simulated): [mock-jtag-0] recover: ok, link restored (simulated)
+2026-11-01 07:17:21  Hardware (simulated): [mock-mcu-0] telemetry #3 [SIMULATED]:  sim_uptime_ticks=300  sim_adc_
+2026-11-01 07:17:21  Hardware (simulated): [mock-fpga-0] telemetry #3 [SIMULATED]:  sim_configured=1  sim_clock_c
+2026-11-01 07:17:21  Hardware (simulated): [mock-jtag-0] telemetry #3 [SIMULATED]:  sim_scan_count=3  sim_vref_se
+2026-11-01 07:17:21  Backprop gradient check + 101 training updates
+2026-11-01 07:17:21  8 of 8 self-checks passed (run 2026-11-01 07:17:21)

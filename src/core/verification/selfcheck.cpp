@@ -1,5 +1,6 @@
 #include "selfcheck.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <sstream>
 
