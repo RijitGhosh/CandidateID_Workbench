@@ -85,7 +85,7 @@ TEST(Batch, CancellationStopsEarlyAndIsReported) {
         while (prog.load() < 5) std::this_thread::yield();
         tok.cancel();
     });
-    const auto r = runParallel(cases, 500, 4, o);
+    const auto r = runParallel(cases, 1000, 4, o);
     canceller.join();
     EXPECT_EQ(r.status, RunStatus::Cancelled);
     EXPECT_LT(r.casesCompleted, cases.size());
