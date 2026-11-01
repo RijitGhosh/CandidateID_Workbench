@@ -1,3 +1,5 @@
+73ce9cc 2026-11-01 07:17 Fix demo walkthrough generator quoting; regenerate walkthrough
+638e261 2026-11-01 07:17 Update commit log
 8c598fe 2026-11-01 07:17 Add Windows CI package workflow, macOS build script, macOS system info, session log evidence
 93e6764 2026-10-31 18:17 Update commit log
 b65af12 2026-10-31 18:17 Fix hex-escape bug in neural page text, table/plot layout; regenerate screenshots
