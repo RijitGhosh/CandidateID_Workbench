@@ -1,17 +1,22 @@
 # Builds, tests, packages and launch-tests the application on a real Windows runner (no local Windows needed).
 # Run it from the GitHub "Actions" tab: windows-package > Run workflow. Download the artifacts when it finishes.
 name: windows-package
+
 on:
   workflow_dispatch:
   push:
     branches: [ main, master ]
+
 jobs:
   build:
     runs-on: windows-2022
     timeout-minutes: 45
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: ilammy/msvc-dev-cmd@v1
+
       - uses: jurplel/install-qt-action@v4
         with:
           version: '6.5.3'
@@ -19,12 +24,16 @@ jobs:
           target: desktop
           arch: win64_msvc2019_64
           cache: true
+
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
+
       - name: Build
         run: cmake --build build
-      - name: Run the C++ tests (the job fails if any test fails)
-        run: ctest --test-dir build --output-on-failure
+
+      - name: Diagnose the failing C++ test
+        run: ctest --test-dir build -R "Batch.CancellationStopsEarlyAndIsReported" --output-on-failure --verbose
+
       - name: Assemble package
         run: |
           $out = "dist/AetherWorkbench"
@@ -37,12 +46,14 @@ jobs:
           Copy-Item data, docs, results -Destination $out -Recurse
           Copy-Item README.md, LICENSES.md $out/
           Get-ChildItem $out -Recurse | Measure-Object -Property Length -Sum | ForEach-Object { "package size: {0:N1} MB, {1} files" -f ($_.Sum/1MB), $_.Count }
+
       - name: Smoke test 1 - GUI starts and exits cleanly on Windows
         timeout-minutes: 3
         run: |
           $p = Start-Process "dist/AetherWorkbench/bin/AetherWorkbench.exe" -ArgumentList "--selftest-ui" -PassThru -Wait
           "exit code: $($p.ExitCode)"
           if ($p.ExitCode -ne 0) { throw "GUI self-test failed" }
+
       - name: Smoke test 2 - double-click path (Launch.exe starts the application)
         timeout-minutes: 3
         run: |
@@ -52,6 +63,7 @@ jobs:
           if (-not $g) { throw "Launch.exe did not start AetherWorkbench.exe" }
           "AetherWorkbench is running (pid $($g.Id))"
           Stop-Process -Name AetherWorkbench -Force
+
       - name: Windows evidence - screenshots and session log from the real Windows build
         continue-on-error: true
         timeout-minutes: 5
@@ -59,15 +71,18 @@ jobs:
           New-Item -ItemType Directory -Force evidence/windows | Out-Null
           Start-Process "dist/AetherWorkbench/bin/AetherWorkbench.exe" -ArgumentList "--screenshots","evidence/windows/screenshots" -Wait
           Get-ChildItem evidence/windows -Recurse | Select-Object FullName
+
       - name: Windows evidence - benchmark (this runner's CPUs; shared cloud VM, so timings are noisy)
         continue-on-error: true
         run: |
           New-Item -ItemType Directory -Force evidence/windows/benchmark | Out-Null
           ./build/aether_results.exe evidence/windows/benchmark
+
       - uses: actions/upload-artifact@v4
         with:
           name: AetherWorkbench_Windows_package
           path: dist/AetherWorkbench
+
       - uses: actions/upload-artifact@v4
         with:
           name: windows_evidence
